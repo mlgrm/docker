@@ -1,0 +1,13 @@
+version: "3"
+services:
+  rstudio:
+    image: mlgrm/rstudio
+    hostname: rstudio
+    ports:
+      - "8787:8787"
+      - "8004:8004"
+      - "3838:3838"
+      - "1410:1410"
+    volumes:
+      - /home/joshua:/home/opencpu
+
