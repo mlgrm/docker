@@ -1,17 +1,18 @@
 # add some packages to ocpu/rstudio to run svy
 FROM opencpu/rstudio:latest
 
-MAINTAINER mlgrm version: 0.01
+MAINTAINER mlgrm version: 0.02
 
 RUN 	apt-get update
 RUN	apt-get upgrade -y
 RUN	apt-get install -y \
 		wget \
+		apache2 \
 		r-cran-rcurl \
 		r-cran-rjava \
 		r-cran-jsonlite \
 		r-cran-dbi \
-		r-cran-rpostgresql 
+		r-cran-rpostgresql
 
 RUN 	echo 	"r <- getOption('repos');" \
 		"r['CRAN'] <- 'http://cran.rstudio.com';" \
@@ -33,6 +34,11 @@ RUN	wget https://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-1.5.6.87
 RUN echo "\noptions(httr_oob_default=TRUE)\n" >> /etc/R/Rprofile.site 
 
 RUN Rscript -e "install.packages('googledrive')"
+RUN a2enmod proxy && \
+  a2enmod proxy_http && \
+  a2enmod proxy_wstunnel && \
+  a2enmod rewrite && \
+  a2enmod headers
 
 EXPOSE 8787
 EXPOSE 8004
