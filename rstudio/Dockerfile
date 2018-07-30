@@ -8,6 +8,7 @@ RUN	apt-get upgrade -y
 RUN	apt-get install -y \
 		wget \
 		apache2 \
+		r-cran-zoo \
 		r-cran-rcurl \
 		r-cran-rjava \
 		r-cran-jsonlite \
